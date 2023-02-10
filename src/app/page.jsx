@@ -1,8 +1,11 @@
+import ChatInput from "@/components/ChatInput";
+import MessageList from "@/components/MessageList";
 
 export default function Home() {
   return (
-    <div>
-      Welcome To Messenger 2.0
-    </div>
-  )
+    <main className="">
+      <MessageList />
+      <ChatInput />
+    </main>
+  );
 }

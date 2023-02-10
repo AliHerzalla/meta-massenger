@@ -1,11 +1,15 @@
 import React from "react";
 import "../styles/globals.css";
+import Header from "./Header";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head />
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
