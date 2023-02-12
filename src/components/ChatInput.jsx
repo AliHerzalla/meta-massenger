@@ -6,7 +6,7 @@ import { v4 as uuid } from "uuid";
 import useSWR from "swr";
 import fetcher from "@/utils/fetchMessages";
 
-const ChatInput = () => {
+const ChatInput = ({ session }) => {
   const [input, setInput] = useState("");
   const { data: messages, error, mutate } = useSWR("/api/getMessages", fetcher);
 
@@ -36,9 +36,6 @@ const ChatInput = () => {
         body: JSON.stringify(message),
       });
       const data = await response.json();
-      // TODO : for testing purposes. should be deleted after end
-      // console.log(data.message);
-      // console.log([data.message, ...messages]);
       return [data.message, ...messages];
     };
     await mutate(uploadMessageToUpStash, {
@@ -55,6 +52,7 @@ const ChatInput = () => {
     >
       <input
         type="text"
+        disabled={!session}
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Enter your message..."

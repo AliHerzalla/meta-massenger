@@ -1,10 +1,17 @@
 import ChatInput from "@/components/ChatInput";
 import MessageList from "@/components/MessageList";
+import { Providers } from "@/app/providers";
+import { getServerSession } from "next-auth/next";
+export default async function Home() {
+  const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`).then(
+    (res) => res.json()
+  );
 
-export default function Home() {
+  const session = await getServerSession();
+
   return (
-    <main className="">
-      <MessageList />
+    <main>
+      <MessageList initMessages={data} />
       <ChatInput />
     </main>
   );
